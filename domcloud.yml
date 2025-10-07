@@ -1,0 +1,24 @@
+source: 'https://github.com/Morakadevs/Lotes-Campestres'
+features:
+  - mysql
+  - php 8.3
+nginx:
+  root: public
+  locations:
+    - match: /
+      try_files: $uri $uri/ /index.php?$args
+  fastcgi: on
+commands:
+  - |
+    echo "<?php" > includes/config/database.php
+    echo "" >> includes/config/database.php
+    echo "function conectarDB() : mysqli {" >> includes/config/database.php
+    echo "    \$db = mysqli_connect('localhost', '${USERNAME}', '${PASSWORD}', '${DATABASE}');" >> includes/config/database.php
+    echo "    \$db->set_charset('utf8');" >> includes/config/database.php    
+    echo "" >> includes/config/database.php
+    echo '    if (!$db) {' >> includes/config/database.php
+    echo '        die(\"Error no se pudo conectar\");' >> includes/config/database.php
+    echo "    }" >> includes/config/database.php
+    echo "" >> includes/config/database.php
+    echo "    return \$db;" >> includes/config/database.php
+    echo "}" >> includes/config/database.php
