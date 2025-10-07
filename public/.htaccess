@@ -1,0 +1,12 @@
+# Evita listar los archivos de las carpetas
+Options -Indexes
+
+# Activa el motor de reescritura
+RewriteEngine On
+
+# Si el archivo o carpeta existe, no reescribir
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Redirige todo al index.php (controlador frontal)
+RewriteRule ^ index.php [L]
