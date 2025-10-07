@@ -14,13 +14,17 @@ nginx:
 commands:
   - |
     mkdir -p includes/config
-    echo "<?php" > includes/config/database.php
-    echo "" >> includes/config/database.php
-    echo "function conectarDB() : mysqli {" >> includes/config/database.php
-    echo "    \$db = new mysqli('localhost', 'root', 'root', 'bienesraices_crud');" >> includes/config/database.php
-    echo "    if (!\$db) {" >> includes/config/database.php
-    echo "        echo 'Error no se pudo conectar';" >> includes/config/database.php
-    echo "        exit;" >> includes/config/database.php
-    echo "    }" >> includes/config/database.php
-    echo "    return \$db;" >> includes/config/database.php
-    echo "}" >> includes/config/database.php
+    cat <<'PHP' > includes/config/database.php
+    <?php
+
+    function conectarDB() : mysqli {
+        $db = new mysqli('localhost', 'root', 'root', 'bienesraices_crud');
+
+        if(!$db) {
+            echo "Error no se pudo conectar";
+            exit;
+        }
+
+        return $db;
+    }
+    PHP
