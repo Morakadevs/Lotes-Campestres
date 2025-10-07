@@ -3,6 +3,7 @@ features:
   - mysql
   - php 8.3
 nginx:
+  type: php
   root: public
   locations:
     - match: /
