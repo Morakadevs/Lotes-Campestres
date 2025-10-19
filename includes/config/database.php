@@ -1,12 +1,17 @@
 <?php 
 
 function conectarDB() : mysqli {
-    $db = new mysqli('localhost', 'lotescampestres', 'doy62FHTQAd73_b)_8', 'lotescampestres');
+    $host = 'localhost';
+    $user = 'lotescampestres';
+    $pass = 'doy62FHTQAd73_b)_8';
+    $db_name = 'lotescampestres';
 
-    if(!$db) {
-        echo "Error no se pudo conectar";
-        exit;
+    $db = new mysqli($host, $user, $pass, $db_name);
+
+    if ($db->connect_errno) {
+        die("❌ Error de conexión a la base de datos ({$db->connect_errno}): " . $db->connect_error);
     }
-    
+
+    $db->set_charset('utf8');
     return $db;
 }
